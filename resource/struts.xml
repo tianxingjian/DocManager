@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="true" />
+	<!--解决乱码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="patchDownLoad" class="com.sanbao.it.action.PatchDownAction">
+			<result name="success" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="contentDisposition">attachment;fileName="${filename}"</param>
+				<param name="inputName">downloadFile</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="error">jsp/download.jsp</result>
+		</action>
+
+		<!-- Action名字，类以及导航页面定义 -->
+		<!-- 通过Action类处理才导航的的Action定义 -->
+		<action name="upload" class="com.sanbao.it.action.UploadAction">
+			<!-- 
+			<result name="input">/jsp/upload.jsp</result>
+			<result name="success">/jsp/result.jsp</result>
+			 -->
+		</action>
+
+	</package>
+	<constant name = "struts.custom.i18n.resources" value = "global" />
+	<constant name="struts.multipart.saveDir" value="d:/tmp"></constant>
+	<constant name="struts.multipart.maxSize" value="4294967296"></constant>
+	<constant name="struts.multipart.parser" value="jakarta"></constant>
+</struts>
